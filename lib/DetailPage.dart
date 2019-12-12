@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_2_by_pabloixx/movie_model.dart';
 
 class DetailPage extends StatelessWidget {
+  final MovieModel model;
+  final String heroTag;
+  DetailPage({Key key, this.model, this.heroTag}) : super(key: key);
+
   List<String> listImage = [
     'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
     'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
@@ -16,6 +21,7 @@ class DetailPage extends StatelessWidget {
     'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
     'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
   ];
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 375, height: 812)..init(context);
@@ -55,24 +61,27 @@ class DetailPage extends StatelessWidget {
                 Positioned(
                   left: paddingLeft,
                   bottom: ScreenUtil.instance.setHeight(20),
-                  child: Container(
-                    height: ScreenUtil.instance.setHeight(185),
-                    width: ScreenUtil.instance.setWidth(115),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/movie_poster/The Irishman.jpg',
+                  child: Hero(
+                    tag: heroTag,
+                    child: Container(
+                      height: ScreenUtil.instance.setHeight(185),
+                      width: ScreenUtil.instance.setWidth(115),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              model.poster,
+                            ),
+                            alignment: Alignment.topLeft,
+                            fit: BoxFit.cover,
                           ),
-                          alignment: Alignment.topLeft,
-                          fit: BoxFit.cover,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.6),
-                              offset: Offset(4,4),
-                              blurRadius: ScreenUtil.instance.setHeight(14)
-                          )
-                        ]
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black.withOpacity(0.6),
+                                offset: Offset(4,4),
+                                blurRadius: ScreenUtil.instance.setHeight(14)
+                            )
+                          ]
+                      ),
                     ),
                   ),
                 ),
@@ -88,52 +97,64 @@ class DetailPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              'DISCOVER',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Tomb Raider',
-                                  fontSize: ScreenUtil.instance.setSp(34),
-                                  fontWeight: FontWeight.normal
+                            Hero(
+                              tag: "titleTag",
+                              child: Material(
+                                color: Colors.transparent,
+                                child: Text(
+                                  model.firstTitle,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Tomb Raider',
+                                      fontSize: ScreenUtil.instance.setSp(34),
+                                      fontWeight: FontWeight.normal
+                                  ),
+                                ),
                               ),
                             ),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: ScreenUtil.instance.setHeight(13),
+                            Hero(
+                              tag: "ratingTag",
+                              child: Material(
+                                color: Colors.transparent,
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: ScreenUtil.instance.setHeight(13),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: ScreenUtil.instance.setHeight(13),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: ScreenUtil.instance.setHeight(13),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: ScreenUtil.instance.setHeight(13),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow.withOpacity(0.5),
+                                      size: ScreenUtil.instance.setHeight(13),
+                                    ),
+                                    Text(
+                                      ' 4/5',
+                                      style: TextStyle(
+                                          fontFamily: 'Tomb Raider',
+                                          color: Colors.white,
+                                          fontSize: ScreenUtil.instance.setSp(14)
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: ScreenUtil.instance.setHeight(13),
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: ScreenUtil.instance.setHeight(13),
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: ScreenUtil.instance.setHeight(13),
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow.withOpacity(0.5),
-                                  size: ScreenUtil.instance.setHeight(13),
-                                ),
-                                Text(
-                                  ' 4/5',
-                                  style: TextStyle(
-                                      fontFamily: 'Tomb Raider',
-                                      color: Colors.white,
-                                      fontSize: ScreenUtil.instance.setSp(14)
-                                  ),
-                                )
-                              ],
+                              ),
                             )
                           ],
                         ),
@@ -172,7 +193,6 @@ class DetailPage extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.only(
                     left: paddingLeft,

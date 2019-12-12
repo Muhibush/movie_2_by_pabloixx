@@ -8,7 +8,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:movie_2_by_pabloixx/DetailPage.dart';
 import 'package:movie_2_by_pabloixx/FadeAnimation.dart';
 import 'package:movie_2_by_pabloixx/movie_model.dart';
-import 'package:simple_animations/simple_animations.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,8 +16,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int activeClassIndex;
-  Playback playback;
-  FadeDirection fadeDirection;
   List<String> listCategory = [
     "Adventure",
     "Animation",
@@ -85,8 +82,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     activeClassIndex = 0;
     activeModel = movies[0];
-    playback = Playback.PLAY_FORWARD;
-    fadeDirection = FadeDirection.left;
   }
 
   @override
@@ -183,7 +178,6 @@ class _HomePageState extends State<HomePage> {
                           onTap: (){
                             setState(() {
                               activeClassIndex=index;
-                              playback=Playback.START_OVER_FORWARD;
                             });
                           },
                           child: Container(
@@ -230,31 +224,35 @@ class _HomePageState extends State<HomePage> {
                     },
                     scale: 0.8,
                     itemBuilder: (BuildContext context, int index) {
+                      String heroTagPoster = index.toString();
                       return GestureDetector(
                         onTap: (){
                           Navigator.push(
                             context,
-                            CupertinoPageRoute(builder: (context) => DetailPage()),
+                            CupertinoPageRoute(builder: (context) => DetailPage(model: movies[index],heroTag: heroTagPoster,)),
                           );
                         },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(15)),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    movies[index].poster,
+                        child: Hero(
+                          tag: heroTagPoster,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      movies[index].poster,
+                                    ),
+                                    alignment: Alignment.bottomCenter,
+                                    fit: BoxFit.cover,
                                   ),
-                                  alignment: Alignment.bottomCenter,
-                                  fit: BoxFit.cover,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.3),
-                                      offset: Offset(2,2),
-                                      blurRadius: 4
-                                  )
-                                ]
-                            )
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.3),
+                                        offset: Offset(2,2),
+                                        blurRadius: 4
+                                    )
+                                  ]
+                              )
+                          ),
                         ),
                       );
                     },
@@ -271,14 +269,20 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          activeModel.firstTitle,
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Tomb Raider',
-                              fontSize: ScreenUtil.instance.setSp(34),
-                              fontWeight: FontWeight.normal
+                        Hero(
+                          tag: "titleTag",
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              activeModel.firstTitle,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Tomb Raider',
+                                  fontSize: ScreenUtil.instance.setSp(34),
+                                  fontWeight: FontWeight.normal
+                              ),
+                            ),
                           ),
                         ),
                         Text(
@@ -292,34 +296,40 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           height: ScreenUtil.instance.setHeight(8),
                         ),
-                        Row(
-                          children: <Widget>[
-                            Container(
-                              height: ScreenUtil.instance.setHeight(15),
-                              child: ListView.builder(
-                                itemCount: 5,
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index){
-                                  return Icon(
-                                    Icons.star,
-                                    color: activeModel.rating-1<index
-                                        ?Colors.yellow.withOpacity(0.5)
-                                        :Colors.yellow,
-                                    size: ScreenUtil.instance.setHeight(13),
-                                  );
-                                }
-                              ),
+                        Hero(
+                          tag: "ratingTag",
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: ScreenUtil.instance.setHeight(15),
+                                  child: ListView.builder(
+                                      itemCount: 5,
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index){
+                                        return Icon(
+                                          Icons.star,
+                                          color: activeModel.rating-1<index
+                                              ?Colors.yellow.withOpacity(0.5)
+                                              :Colors.yellow,
+                                          size: ScreenUtil.instance.setHeight(13),
+                                        );
+                                      }
+                                  ),
+                                ),
+                                Text(
+                                  " ${activeModel.rating}/5",
+                                  style: TextStyle(
+                                      fontFamily: 'Tomb Raider',
+                                      color: Colors.white,
+                                      fontSize: ScreenUtil.instance.setSp(14)
+                                  ),
+                                )
+                              ],
                             ),
-                            Text(
-                              " ${activeModel.rating}/5",
-                              style: TextStyle(
-                                fontFamily: 'Tomb Raider',
-                                color: Colors.white,
-                                fontSize: ScreenUtil.instance.setSp(14)
-                              ),
-                            )
-                          ],
+                          ),
                         )
                       ],
                     ),
@@ -367,7 +377,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
