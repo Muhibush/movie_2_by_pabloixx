@@ -26,6 +26,8 @@ dependencies:
   flutter_screenutil: ^0.7.0
   flutter_swiper: ^1.1.6
   simple_animations: ^1.3.4
+  video_player: ^0.10.4
+  chewie: ^0.9.8
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +57,16 @@ flutter:
    - assets/movie_poster/Knives Out.jpg
    - assets/movie_poster/Midway (2019).jpg
    - assets/movie_poster/The Irishman.jpg
+   - assets/cast_image/cast1.jpg
+   - assets/cast_image/cast2.jpeg
+   - assets/cast_image/cast3.jpg
+   - assets/cast_image/cast4.jpeg
+   - assets/cast_image/cast5.jpg
+   - assets/cast_image/cast6.webp
+   - assets/cast_image/cast7.jpg
+   - assets/cast_image/cast8.jpeg
+   - assets/cast_image/cast9.jpg
+   - assets/movie_trailer_video/Exclusive.mp4
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

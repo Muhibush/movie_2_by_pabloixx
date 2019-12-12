@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   List<MovieModel> movies =[
     MovieModel(
         title: "A Beautiful Day in the Neighborhood",
+        director: "Marielle Heller",
         rating: 3.95,
         genres: "Biography, Drama",
         plot: "Based on the true story of a real-life friendship between Fred Rogers and journalist Tom Junod.",
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
     ),
     MovieModel(
         title: "Dark Waters",
+        director: "Todd Haynes",
         rating: 3.75,
         genres: "Biography, Drama, History",
         plot: "A corporate defense attorney takes on an environmental lawsuit against a chemical company that exposes a lengthy history of pollution.",
@@ -44,6 +46,7 @@ class _HomePageState extends State<HomePage> {
     ),
     MovieModel(
         title: "The Irishman",
+        director: "Martin Scorsese",
         rating: 4.15,
         genres: "Biography, Crime, Drama",
         plot: "A mob hitman recalls his possible involvement with the slaying of Jimmy Hoffa.",
@@ -52,6 +55,7 @@ class _HomePageState extends State<HomePage> {
     ),
     MovieModel(
         title: "Knives Out",
+        director: "Rian Johnson",
         rating: 4.1,
         genres: "Comedy, Crime, Drama",
         plot: "A detective investigates the death of a patriarch of an eccentric, combative family.",
@@ -60,6 +64,7 @@ class _HomePageState extends State<HomePage> {
     ),
     MovieModel(
         title: "It Chapter Two",
+        director: "Andy Muschietti",
         rating: 3.35,
         genres: "Drama, Fantasy, Horror",
         plot: "Twenty-seven years after their first encounter with the terrifying Pennywise, the Losers Club have grown up and moved away, until a devastating phone call brings them back.",
@@ -68,6 +73,7 @@ class _HomePageState extends State<HomePage> {
     ),
     MovieModel(
         title: "Angel Has Fallen",
+        director: "Ric Roman Waugh",
         rating: 3.2,
         genres: "Action, Thriller",
         plot: "Mike Banning is framed for the attempted assassination of the President and must evade his own agency and the FBI as he tries to uncover the real threat.",

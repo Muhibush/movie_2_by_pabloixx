@@ -1,26 +1,63 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_2_by_pabloixx/movie_model.dart';
+import 'package:video_player/video_player.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final MovieModel model;
   final String heroTag;
   DetailPage({Key key, this.model, this.heroTag}) : super(key: key);
 
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  VideoPlayerController _videoPlayerController;
+  ChewieController _chewieController;
+
   List<String> listImage = [
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
-    'assets/movie_poster/A Beautiful Day in the Neighborhood.jpg',
+    "assets/cast_image/cast1.jpg",
+    "assets/cast_image/cast2.jpeg",
+    "assets/cast_image/cast3.jpg",
+    "assets/cast_image/cast4.jpeg",
+    "assets/cast_image/cast5.jpg",
+    "assets/cast_image/cast6.webp",
+    "assets/cast_image/cast7.jpg",
+    "assets/cast_image/cast8.jpeg",
+    "assets/cast_image/cast9.jpg",
+    "assets/cast_image/cast1.jpg",
+    "assets/cast_image/cast2.jpeg",
+    "assets/cast_image/cast3.jpg",
+    "assets/cast_image/cast4.jpeg",
+    "assets/cast_image/cast5.jpg",
+    "assets/cast_image/cast6.webp",
+    "assets/cast_image/cast7.jpg",
+    "assets/cast_image/cast8.jpeg",
+    "assets/cast_image/cast9.jpg",
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _videoPlayerController = VideoPlayerController.asset(
+        'assets/movie_trailer_video/Exclusive.mp4');
+
+    _chewieController = ChewieController(
+        videoPlayerController: _videoPlayerController,
+        aspectRatio: ScreenUtil.instance.setWidth(327) / ScreenUtil.instance.setHeight(185),
+        autoPlay: true,
+        looping: true,
+    );
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    _chewieController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +99,14 @@ class DetailPage extends StatelessWidget {
                   left: paddingLeft,
                   bottom: ScreenUtil.instance.setHeight(20),
                   child: Hero(
-                    tag: heroTag,
+                    tag: widget.heroTag,
                     child: Container(
                       height: ScreenUtil.instance.setHeight(185),
                       width: ScreenUtil.instance.setWidth(115),
                       decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                              model.poster,
+                              widget.model.poster,
                             ),
                             alignment: Alignment.topLeft,
                             fit: BoxFit.cover,
@@ -91,8 +128,10 @@ class DetailPage extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        height: ScreenUtil.instance.setHeight(75),
                         width: ScreenUtil.instance.setWidth(215),
+                        margin: EdgeInsets.only(
+                          bottom: ScreenUtil.instance.setHeight(5)
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -102,11 +141,12 @@ class DetailPage extends StatelessWidget {
                               child: Material(
                                 color: Colors.transparent,
                                 child: Text(
-                                  model.firstTitle,
+                                  widget.model.title,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Tomb Raider',
+                                      height: 0.9,
                                       fontSize: ScreenUtil.instance.setSp(34),
                                       fontWeight: FontWeight.normal
                                   ),
@@ -119,33 +159,25 @@ class DetailPage extends StatelessWidget {
                                 color: Colors.transparent,
                                 child: Row(
                                   children: <Widget>[
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
-                                      size: ScreenUtil.instance.setHeight(13),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
-                                      size: ScreenUtil.instance.setHeight(13),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
-                                      size: ScreenUtil.instance.setHeight(13),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
-                                      size: ScreenUtil.instance.setHeight(13),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow.withOpacity(0.5),
-                                      size: ScreenUtil.instance.setHeight(13),
+                                    Container(
+                                      height: ScreenUtil.instance.setHeight(15),
+                                      child: ListView.builder(
+                                          itemCount: 5,
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemBuilder: (context, index){
+                                            return Icon(
+                                              Icons.star,
+                                              color: widget.model.rating-1<index
+                                                  ?Colors.yellow.withOpacity(0.5)
+                                                  :Colors.yellow,
+                                              size: ScreenUtil.instance.setHeight(13),
+                                            );
+                                          }
+                                      ),
                                     ),
                                     Text(
-                                      ' 4/5',
+                                      " ${widget.model.rating}/5",
                                       style: TextStyle(
                                           fontFamily: 'Tomb Raider',
                                           color: Colors.white,
@@ -180,7 +212,7 @@ class DetailPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'Protect our earth together.',
+                              widget.model.director,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontSize: ScreenUtil.instance.setSp(12),
@@ -229,13 +261,13 @@ class DetailPage extends StatelessWidget {
             ),
             color: Colors.white,
             child: Text(
-              'Lara Croft, a courageous and independent young woman, sets out on a dangerous journey to unravel the truth behind her adventurer father`s mysterious disappearance.',
+              widget.model.plot,
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontSize: ScreenUtil.instance.setSp(10),
                 height: 1.6,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
+                color: Colors.black.withOpacity(0.8),
               ),
             ),
           ),
@@ -263,6 +295,9 @@ class DetailPage extends StatelessWidget {
                   )
                 ]
             ),
+            child: Chewie(
+              controller: _chewieController,
+            ),
           ),
           Divider(
             height: 0,
@@ -278,7 +313,7 @@ class DetailPage extends StatelessWidget {
               top: ScreenUtil.instance.setHeight(20)
             ),
             child: Text(
-              'DIRECTOR',
+              'CAST',
               textAlign: TextAlign.start,
               style: TextStyle(
                   color: Colors.black,
@@ -290,13 +325,12 @@ class DetailPage extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(
-                top: ScreenUtil.instance.setHeight(5)
+                top: ScreenUtil.instance.setHeight(10)
             ),
-//            color: Colors.red,
             height: ScreenUtil.instance.setHeight(55),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: listImage.length+1,
+              itemCount: listImage.length,
               itemBuilder: (context, index){
                 return index==0
                     ?SizedBox(
@@ -316,7 +350,7 @@ class DetailPage extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       image: AssetImage(
-                        'assets/movie_poster/The Irishman.jpg',
+                        listImage[index],
                       ),
                       alignment: Alignment.topLeft,
                       fit: BoxFit.cover,
