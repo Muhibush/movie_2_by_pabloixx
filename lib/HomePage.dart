@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_2_by_pabloixx/DetailPage.dart';
+import 'package:movie_2_by_pabloixx/FadeAnimation.dart';
 import 'package:movie_2_by_pabloixx/movie_model.dart';
 import 'package:provider/provider.dart';
 
@@ -248,17 +249,21 @@ class MyAppBar extends StatelessWidget {
 class PageTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: ScreenUtil.instance.setWidth(48),
-          top: ScreenUtil.instance.setHeight(10)),
-      child: Text(
-        'Discover',
-        textAlign: TextAlign.start,
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: ScreenUtil.instance.setSp(33),
-            fontWeight: FontWeight.bold),
+    return FadeAnimation(
+      fadeDirection: FadeDirection.left,
+      delay: 1,
+      child: Padding(
+        padding: EdgeInsets.only(
+            left: ScreenUtil.instance.setWidth(48),
+            top: ScreenUtil.instance.setHeight(10)),
+        child: Text(
+          'Discover',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: ScreenUtil.instance.setSp(33),
+              fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
@@ -283,43 +288,47 @@ class _TopGenreState extends State<TopGenre> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: ScreenUtil.instance.setHeight(35),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: widget.listCategory.length,
-        itemBuilder: (context, index) {
-          return Center(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  activeClassIndex = index;
-                });
-              },
-              child: Container(
-                margin: EdgeInsets.only(
-                    left: index == 0 ? ScreenUtil.instance.setWidth(48) : 0),
-                height: ScreenUtil.instance.setHeight(31),
-                padding:
-                    EdgeInsets.only(right: ScreenUtil.instance.setWidth(40)),
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  widget.listCategory[index],
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: ScreenUtil.instance.setSp(16),
-                    fontWeight: activeClassIndex == index
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                    color: activeClassIndex == index
-                        ? Colors.white
-                        : Colors.white.withOpacity(0.5),
+    return FadeAnimation(
+      fadeDirection: FadeDirection.left,
+      delay: 1.5,
+      child: Container(
+        height: ScreenUtil.instance.setHeight(35),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: widget.listCategory.length,
+          itemBuilder: (context, index) {
+            return Center(
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    activeClassIndex = index;
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(
+                      left: index == 0 ? ScreenUtil.instance.setWidth(48) : 0),
+                  height: ScreenUtil.instance.setHeight(31),
+                  padding:
+                      EdgeInsets.only(right: ScreenUtil.instance.setWidth(40)),
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    widget.listCategory[index],
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: ScreenUtil.instance.setSp(16),
+                      fontWeight: activeClassIndex == index
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: activeClassIndex == index
+                          ? Colors.white
+                          : Colors.white.withOpacity(0.5),
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -333,22 +342,26 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(20)),
-      height: ScreenUtil.instance.setHeight(430),
-      width: ScreenUtil.instance.setWidth(375),
-      child: PageView.builder(
-        physics: BouncingScrollPhysics(),
-        itemCount: movies.length,
-        controller: pageController,
-        itemBuilder: (BuildContext context, int index) {
-          String heroTagPoster = index.toString();
-          return MovieCard(
-            movieModel: movies[index],
-            heroTagPoster: heroTagPoster,
-            index: index,
-          );
-        },
+    return FadeAnimation(
+        fadeDirection: FadeDirection.left,
+        delay: 2,
+      child: Container(
+        margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(20)),
+        height: ScreenUtil.instance.setHeight(430),
+        width: ScreenUtil.instance.setWidth(375),
+        child: PageView.builder(
+          physics: BouncingScrollPhysics(),
+          itemCount: movies.length,
+          controller: pageController,
+          itemBuilder: (BuildContext context, int index) {
+            String heroTagPoster = index.toString();
+            return MovieCard(
+              movieModel: movies[index],
+              heroTagPoster: heroTagPoster,
+              index: index,
+            );
+          },
+        ),
       ),
     );
   }
@@ -361,80 +374,84 @@ class InfoMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: ScreenUtil.instance.setWidth(48),
-          top: ScreenUtil.instance.setHeight(20)),
-      child:
-          Consumer<PageOffsetNotifier>(builder: (context, offsetNotifier, _) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Hero(
-              tag: "titleTag",
-              child: Material(
-                color: Colors.transparent,
-                child: Text(
-                  movies[offsetNotifier.page.round()].firstTitle,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Tomb Raider',
-                      fontSize: ScreenUtil.instance.setSp(34),
-                      fontWeight: FontWeight.normal),
+    return FadeAnimation(
+      fadeDirection: FadeDirection.left,
+      delay: 2.5,
+      child: Padding(
+        padding: EdgeInsets.only(
+            left: ScreenUtil.instance.setWidth(48),
+            top: ScreenUtil.instance.setHeight(20)),
+        child:
+            Consumer<PageOffsetNotifier>(builder: (context, offsetNotifier, _) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Hero(
+                tag: "titleTag",
+                child: Material(
+                  color: Colors.transparent,
+                  child: Text(
+                    movies[offsetNotifier.page.round()].firstTitle,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Tomb Raider',
+                        fontSize: ScreenUtil.instance.setSp(34),
+                        fontWeight: FontWeight.normal),
+                  ),
                 ),
               ),
-            ),
-            Text(
-              movies[offsetNotifier.page.round()].lastTitle,
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                  fontSize: ScreenUtil.instance.setSp(12),
-                  color: Colors.white.withOpacity(0.6),
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: ScreenUtil.instance.setHeight(8),
-            ),
-            Hero(
-              tag: "ratingTag",
-              child: Material(
-                color: Colors.transparent,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      height: ScreenUtil.instance.setHeight(15),
-                      child: ListView.builder(
-                          itemCount: 5,
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Icon(
-                              Icons.star,
-                              color:
-                                  movies[offsetNotifier.page.round()].rating -
-                                              1 <
-                                          index
-                                      ? Colors.yellow.withOpacity(0.5)
-                                      : Colors.yellow,
-                              size: ScreenUtil.instance.setHeight(13),
-                            );
-                          }),
-                    ),
-                    Text(
-                      " ${movies[offsetNotifier.page.round()].rating}/5",
-                      style: TextStyle(
-                          fontFamily: 'Tomb Raider',
-                          color: Colors.white,
-                          fontSize: ScreenUtil.instance.setSp(14)),
-                    )
-                  ],
-                ),
+              Text(
+                movies[offsetNotifier.page.round()].lastTitle,
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontSize: ScreenUtil.instance.setSp(12),
+                    color: Colors.white.withOpacity(0.6),
+                    fontWeight: FontWeight.bold),
               ),
-            )
-          ],
-        );
-      }),
+              SizedBox(
+                height: ScreenUtil.instance.setHeight(8),
+              ),
+              Hero(
+                tag: "ratingTag",
+                child: Material(
+                  color: Colors.transparent,
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        height: ScreenUtil.instance.setHeight(15),
+                        child: ListView.builder(
+                            itemCount: 5,
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return Icon(
+                                Icons.star,
+                                color:
+                                    movies[offsetNotifier.page.round()].rating -
+                                                1 <
+                                            index
+                                        ? Colors.yellow.withOpacity(0.5)
+                                        : Colors.yellow,
+                                size: ScreenUtil.instance.setHeight(13),
+                              );
+                            }),
+                      ),
+                      Text(
+                        " ${movies[offsetNotifier.page.round()].rating}/5",
+                        style: TextStyle(
+                            fontFamily: 'Tomb Raider',
+                            color: Colors.white,
+                            fontSize: ScreenUtil.instance.setSp(14)),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          );
+        }),
+      ),
     );
   }
 }
@@ -446,37 +463,41 @@ class BottomGenre extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(20)),
-      height: ScreenUtil.instance.setHeight(25),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: listCategory.length,
-        itemBuilder: (context, index) {
-          return Center(
-            child: Container(
-              height: ScreenUtil.instance.setHeight(25),
-              margin: EdgeInsets.only(
-                  left: index == 0 ? ScreenUtil.instance.setWidth(48) : 0,
-                  right: ScreenUtil.instance.setWidth(15)),
-              padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil.instance.setWidth(14)),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Colors.white.withOpacity(0.6), width: 0.6),
-                  borderRadius: BorderRadius.all(Radius.circular(25))),
-              child: Text(
-                listCategory[index],
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: ScreenUtil.instance.setSp(12),
-                  color: Colors.white.withOpacity(0.6),
+    return FadeAnimation(
+      fadeDirection: FadeDirection.left,
+      delay: 3,
+      child: Container(
+        margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(20)),
+        height: ScreenUtil.instance.setHeight(25),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: listCategory.length,
+          itemBuilder: (context, index) {
+            return Center(
+              child: Container(
+                height: ScreenUtil.instance.setHeight(25),
+                margin: EdgeInsets.only(
+                    left: index == 0 ? ScreenUtil.instance.setWidth(48) : 0,
+                    right: ScreenUtil.instance.setWidth(15)),
+                padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtil.instance.setWidth(14)),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.white.withOpacity(0.6), width: 0.6),
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
+                child: Text(
+                  listCategory[index],
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: ScreenUtil.instance.setSp(12),
+                    color: Colors.white.withOpacity(0.6),
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
