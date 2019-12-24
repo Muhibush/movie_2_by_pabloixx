@@ -92,7 +92,8 @@ class _HomePageState extends State<HomePage> {
 
     return Material(
       child: ChangeNotifierProvider(
-        builder: (_) => PageOffsetNotifier(pageController, movies.length),
+        create: (_) => PageOffsetNotifier(pageController, movies.length),
+        lazy: false,
         child: Stack(
           children: <Widget>[
             Background(
