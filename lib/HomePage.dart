@@ -27,14 +27,6 @@ class _HomePageState extends State<HomePage> {
   ];
   List<MovieModel> movies = [
     MovieModel(
-        title: "A Beautiful Day in the Neighborhood",
-        director: "Marielle Heller",
-        rating: 3.95,
-        genres: "Biography, Drama",
-        plot: "Based on the true story of a real-life friendship between Fred Rogers and journalist Tom Junod.",
-        actors: "Tom Hanks, Matthew Rhys, Chris Cooper",
-        poster: "assets/movie_poster/A_Beautiful.jpg"),
-    MovieModel(
         title: "Dark Waters",
         director: "Todd Haynes",
         rating: 3.75,
@@ -43,21 +35,21 @@ class _HomePageState extends State<HomePage> {
         actors: "Anne Hathaway, Mark Ruffalo, William Jackson Harper",
         poster: "assets/movie_poster/Dark_Waters.jpg"),
     MovieModel(
-        title: "The Irishman",
-        director: "Martin Scorsese",
-        rating: 4.15,
-        genres: "Biography, Crime, Drama",
-        plot: "A mob hitman recalls his possible involvement with the slaying of Jimmy Hoffa.",
-        actors: "Robert De Niro, Al Pacino, Joe Pesci",
-        poster: "assets/movie_poster/The_Irishman.jpg"),
+        title: "A Beautiful Day in the Neighborhood",
+        director: "Marielle Heller",
+        rating: 3.95,
+        genres: "Biography, Drama",
+        plot: "Based on the true story of a real-life friendship between Fred Rogers and journalist Tom Junod.",
+        actors: "Tom Hanks, Matthew Rhys, Chris Cooper",
+        poster: "assets/movie_poster/A_Beautiful.jpg"),
     MovieModel(
-        title: "Knives Out",
-        director: "Rian Johnson",
-        rating: 4.1,
-        genres: "Comedy, Crime, Drama",
-        plot: "A detective investigates the death of a patriarch of an eccentric, combative family.",
-        actors: "Daniel Craig, Chris Evans, Ana de Armas",
-        poster: "assets/movie_poster/Knives_Out.jpg"),
+        title: "Angel Has Fallen",
+        director: "Ric Roman Waugh",
+        rating: 3.2,
+        genres: "Action, Thriller",
+        plot: "Mike Banning is framed for the attempted assassination of the President and must evade his own agency and the FBI as he tries to uncover the real threat.",
+        actors: "Gerard Butler, Frederick Schmidt, Danny Huston",
+        poster: "assets/movie_poster/Angel_Has.jpg"),
     MovieModel(
         title: "It Chapter Two",
         director: "Andy Muschietti",
@@ -67,13 +59,21 @@ class _HomePageState extends State<HomePage> {
         actors: "Jessica Chastain, James McAvoy, Bill Hader",
         poster: "assets/movie_poster/It_Chapter.jpg"),
     MovieModel(
-        title: "Angel Has Fallen",
-        director: "Ric Roman Waugh",
-        rating: 3.2,
-        genres: "Action, Thriller",
-        plot: "Mike Banning is framed for the attempted assassination of the President and must evade his own agency and the FBI as he tries to uncover the real threat.",
-        actors: "Gerard Butler, Frederick Schmidt, Danny Huston",
-        poster: "assets/movie_poster/Angel_Has.jpg"),
+        title: "Knives Out",
+        director: "Rian Johnson",
+        rating: 4.1,
+        genres: "Comedy, Crime, Drama",
+        plot: "A detective investigates the death of a patriarch of an eccentric, combative family.",
+        actors: "Daniel Craig, Chris Evans, Ana de Armas",
+        poster: "assets/movie_poster/Knives_Out.jpg"),
+    MovieModel(
+        title: "The Irishman",
+        director: "Martin Scorsese",
+        rating: 4.15,
+        genres: "Biography, Crime, Drama",
+        plot: "A mob hitman recalls his possible involvement with the slaying of Jimmy Hoffa.",
+        actors: "Robert De Niro, Al Pacino, Joe Pesci",
+        poster: "assets/movie_poster/The_Irishman.jpg"),
   ];
 
   @override
@@ -252,7 +252,7 @@ class PageTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimation(
       fadeDirection: FadeDirection.left,
-      delay: 1,
+      delay: 1.5,
       child: Padding(
         padding: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(48),
@@ -291,7 +291,7 @@ class _TopGenreState extends State<TopGenre> {
   Widget build(BuildContext context) {
     return FadeAnimation(
       fadeDirection: FadeDirection.left,
-      delay: 1.5,
+      delay: 2,
       child: Container(
         height: ScreenUtil.instance.setHeight(35),
         child: ListView.builder(
@@ -345,7 +345,7 @@ class ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimation(
         fadeDirection: FadeDirection.left,
-        delay: 2,
+        delay: 2.5,
       child: Container(
         margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(20)),
         height: ScreenUtil.instance.setHeight(430),
@@ -377,7 +377,7 @@ class InfoMovie extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimation(
       fadeDirection: FadeDirection.left,
-      delay: 2.5,
+      delay: 3,
       child: Padding(
         padding: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(48),
@@ -466,7 +466,7 @@ class BottomGenre extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeAnimation(
       fadeDirection: FadeDirection.left,
-      delay: 3,
+      delay: 3.5,
       child: Container(
         margin: EdgeInsets.only(top: ScreenUtil.instance.setHeight(20)),
         height: ScreenUtil.instance.setHeight(25),
